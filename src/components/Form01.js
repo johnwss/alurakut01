@@ -1,11 +1,16 @@
-import styled from "styled-components";
-
 function Form01()
 {
+
     return(
+        
     <form onSubmit={function handleCreateCommunity(e){
+      
         e.preventDefault();
-        console.log(e);
+        comunidades.push('opa')
+        
+       
+      
+        
     }}>
     <div>
     <input placeholder="Qual o nome da sua comunidade?"

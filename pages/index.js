@@ -1,15 +1,19 @@
+import React from 'react';
 import MainGrid from '../src/components/MainGrid';
 import Box from '../src/components/Box';
 import {AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet} from '../src/lib/AlurakutCommons'
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelationsBoxWrapper';
-import Form01 from '../src/components/Form01'
+//import Form01 from '../src/components/Form01'
+
+
 // const Title = styled.h1`
 //   font-size: 50px;
 //   color: ${({ theme }) => theme.colors.primary};
 // `
 
 
-const comunidade = [];
+
+
 
 
 function ProfileSidebar(props){
@@ -27,8 +31,13 @@ return(
 }
 
 function Home(){
+
   const githubUser = 'johnwss';
+  const [comunidades,setComunidades] = React.useState(['Alurakut'])
+  //console.log(comunidades)
   const pessoas = ['juunegreiros','gabrieluizramos','ramosht','omariosouto','filipedeschamps','fialhogi']
+  //const comunidades = ['Alurakut']
+ 
   return (
     <>
 <AlurakutMenu/>
@@ -43,11 +52,39 @@ function Home(){
   </Box>
   <Box > 
     <h2 className="subTitle">O que deseja acrescentar hoje?</h2>
-  <Form01/>
+    <form onSubmit={function handleCreateCommunity(e){
+      
+      e.preventDefault();
+      setComunidades([...comunidades,'Outra'])
+      //console.log(comunidades)
+      
+     
+    
+      
+  }}>
+  <div>
+  <input placeholder="Qual o nome da sua comunidade?"
+  nome="title"
+  aria-label="qual vai ser o nome da sua comunidade?"
+  type="text"/>
+  </div>
+  <div>
+  <input placeholder="Qual seria a URL?"
+  nome="image"
+  aria-label="qual vai ser o nome da sua comunidade?"
+  type="text"/>
+  </div>
+  <button>Criar Comunidade</button>
+  </form>
+
+  
+
+  {/* <Form01/> */}
   </Box>
   </div>  
 
 <div className="profileArea" style={{gridArea:'profileRelationsArea'}} >
+
   <ProfileRelationsBoxWrapper>
   <h2 className="smallTitle">
   Perfis({pessoas.length})</h2> <ul>{pessoas.map((i)=>{
@@ -59,7 +96,16 @@ function Home(){
   )
   })}</ul>
   </ProfileRelationsBoxWrapper>
-<Box>Comunidades</Box>
+  <Box>Comunidades<ProfileRelationsBoxWrapper>
+<ul>{comunidades.map((i)=>{
+  return (<li>
+  <a href={`https://github.com/${i}`} key={i}>
+  <img src={`https://picsum.photos/300/300`}/>
+  <span>{i}</span>
+  </a></li>
+  )
+  })}</ul>
+</ProfileRelationsBoxWrapper> </Box>
 </div>
 </MainGrid>
 </>)}

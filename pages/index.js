@@ -34,7 +34,6 @@ function Home(){
 
   const githubUser = 'johnwss';
   const [comunidades,setComunidades] = React.useState(['Alurakut'])
-  //console.log(comunidades)
   const pessoas = ['juunegreiros','gabrieluizramos','ramosht','omariosouto','filipedeschamps','fialhogi']
   //const comunidades = ['Alurakut']
  
@@ -52,10 +51,18 @@ function Home(){
   </Box>
   <Box > 
     <h2 className="subTitle">O que deseja acrescentar hoje?</h2>
-    <form onSubmit={function handleCreateCommunity(e){
+    
+    <form onSubmit={function handleCreateCommunity(z){
+     
+     
       
-      e.preventDefault();
-      setComunidades([...comunidades,'Outra'])
+      z.preventDefault();
+      const dadosDoFormulario = new FormData(z.target);
+      console.log('Campo:' , dadosDoFormulario.get('title'));
+      console.log('Campo:' , dadosDoFormulario.get('image'));
+      const comunidadesAtualizadas = [...comunidades,'outraqlq']
+      setComunidades(comunidadesAtualizadas)
+      
       //console.log(comunidades)
       
      
@@ -64,13 +71,13 @@ function Home(){
   }}>
   <div>
   <input placeholder="Qual o nome da sua comunidade?"
-  nome="title"
+  name="title"
   aria-label="qual vai ser o nome da sua comunidade?"
   type="text"/>
   </div>
   <div>
   <input placeholder="Qual seria a URL?"
-  nome="image"
+  name="image"
   aria-label="qual vai ser o nome da sua comunidade?"
   type="text"/>
   </div>
@@ -87,14 +94,17 @@ function Home(){
 
   <ProfileRelationsBoxWrapper>
   <h2 className="smallTitle">
-  Perfis({pessoas.length})</h2> <ul>{pessoas.map((i)=>{
+  Perfis({pessoas.length})</h2> 
+  
+  <ul>{pessoas.map((i)=>{
   return (<li>
   <a href={`https://github.com/${i}`} key={i}>
   <img src={`https://github.com/${i}.png`}/>
   <span>{i}</span>
   </a></li>
-  )
-  })}</ul>
+  )})}
+  </ul>
+
   </ProfileRelationsBoxWrapper>
   <Box>Comunidades<ProfileRelationsBoxWrapper>
 <ul>{comunidades.map((i)=>{
@@ -105,7 +115,8 @@ function Home(){
   </a></li>
   )
   })}</ul>
-</ProfileRelationsBoxWrapper> </Box>
+</ProfileRelationsBoxWrapper>
+</Box>
 </div>
 </MainGrid>
 </>)}

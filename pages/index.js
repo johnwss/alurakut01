@@ -33,7 +33,8 @@ return(
 function Home(){
 
   const githubUser = 'johnwss';
-  const [comunidades,setComunidades] = React.useState(['Alurakut'])
+  const [comunidades,setComunidades] = React.useState([{title:'Garfield',
+  image:'https://static.wikia.nocookie.net/garfield/images/9/9f/GarfieldCharacter.jpg'}])
   const pessoas = ['juunegreiros','gabrieluizramos','ramosht','omariosouto','filipedeschamps','fialhogi']
   //const comunidades = ['Alurakut']
  
@@ -60,8 +61,26 @@ function Home(){
       const dadosDoFormulario = new FormData(z.target);
       console.log('Campo:' , dadosDoFormulario.get('title'));
       console.log('Campo:' , dadosDoFormulario.get('image'));
-      const comunidadesAtualizadas = [...comunidades,'outraqlq']
+      
+
+
+      const comunidade = {
+        title:dadosDoFormulario.get('title'),
+        image:dadosDoFormulario.get('image')
+      }
+      
+      if(comunidade.title == '' || comunidade.image == ''){
+        window.alert('Parar criar comunidades preencha todos os campos')
+      }else{
+
+      const comunidadesAtualizadas = [...comunidades,comunidade]
       setComunidades(comunidadesAtualizadas)
+      
+    }
+
+
+
+      
       
       //console.log(comunidades)
       
@@ -109,9 +128,9 @@ function Home(){
   <Box>Comunidades<ProfileRelationsBoxWrapper>
 <ul>{comunidades.map((i)=>{
   return (<li>
-  <a href={`https://github.com/${i}`} key={i}>
-  <img src={`https://picsum.photos/300/300`}/>
-  <span>{i}</span>
+  <a href={`https://github.com/${i.title}`} key={i.title}>
+  <img src={i.image}/>
+  <span>{i.title}</span>
   </a></li>
   )
   })}</ul>

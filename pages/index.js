@@ -33,7 +33,7 @@ return(
 function Home(){
 
   const githubUser = 'johnwss';
-  const [comunidades,setComunidades] = React.useState([{title:'Garfield',
+  const [comunidades,setComunidades] = React.useState([{id:'001',title:'Garfield',
   image:'https://static.wikia.nocookie.net/garfield/images/9/9f/GarfieldCharacter.jpg'}])
   const pessoas = ['juunegreiros','gabrieluizramos','ramosht','omariosouto','filipedeschamps','fialhogi']
   //const comunidades = ['Alurakut']
@@ -65,6 +65,7 @@ function Home(){
 
 
       const comunidade = {
+        id:new Date().toISOString,
         title:dadosDoFormulario.get('title'),
         image:dadosDoFormulario.get('image')
       }
@@ -116,7 +117,7 @@ function Home(){
   Perfis({pessoas.length})</h2> 
   
   <ul>{pessoas.map((i)=>{
-  return (<li>
+  return (<li key={i}>
   <a href={`https://github.com/${i}`} key={i}>
   <img src={`https://github.com/${i}.png`}/>
   <span>{i}</span>
@@ -127,8 +128,8 @@ function Home(){
   </ProfileRelationsBoxWrapper>
   <Box>Comunidades<ProfileRelationsBoxWrapper>
 <ul>{comunidades.map((i)=>{
-  return (<li>
-  <a href={`https://github.com/${i.title}`} key={i.title}>
+  return (<li key={i.id}>
+  <a href={`https://github.com/${i.title}`} >
   <img src={i.image}/>
   <span>{i.title}</span>
   </a></li>

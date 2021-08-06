@@ -30,6 +30,24 @@ return(
   )
 }
 
+function ProfileRelationsBox(propriedadesrjs){
+ return ( <ProfileRelationsBoxWrapper>
+  <h2 className="smallTitle">
+  {propriedadesrjs.title}({propriedadesrjs.items.length})</h2> 
+  
+  {/* <ul>{seguidores.map((i)=>{
+  return (<li key={i}>
+  <a href={`https://github.com/${i}`} key={i}>
+  <img src={`https://github.com/${i}.png`}/>
+  <span>{i}</span>
+  </a></li>
+  )})}
+  </ul> */}
+</ProfileRelationsBoxWrapper> )}
+
+
+
+
 function Home(){
 
   const githubUser = 'johnwss';
@@ -37,6 +55,14 @@ function Home(){
   image:'https://static.wikia.nocookie.net/garfield/images/9/9f/GarfieldCharacter.jpg'}])
   const pessoas = ['juunegreiros','gabrieluizramos','ramosht','omariosouto','filipedeschamps','fialhogi']
   //const comunidades = ['Alurakut']
+
+ const [seguidores,setSeguidores] = React.useState([])
+React.useEffect(()=>{
+  fetch('https://api.github.com/users/juunegreiros/followers')
+  .then((x)=>{return x.json()})
+  .then((z)=>{setSeguidores(z)})
+},[])
+  //console.log(seguidores);
  
   return (
     <>
@@ -103,14 +129,13 @@ function Home(){
   </div>
   <button>Criar Comunidade</button>
   </form>
-
-  
-
-  {/* <Form01/> */}
+{/* <Form01/> */}
   </Box>
   </div>  
 
 <div className="profileArea" style={{gridArea:'profileRelationsArea'}} >
+<ProfileRelationsBox title="Seguidores" items={seguidores}/>
+
 
   <ProfileRelationsBoxWrapper>
   <h2 className="smallTitle">

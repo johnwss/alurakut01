@@ -15,7 +15,7 @@ function Form01()
     <div>
     <input placeholder="Qual o nome da sua comunidade?"
     nome="title"
-    aria-label="qual vai ser o nome da sua comunidade?"
+    aria-label="Qual vai ser o nome da sua comunidade?"
     type="text"/>
     </div>
     <div>
